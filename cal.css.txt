@@ -1,0 +1,197 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    font-family: 'Arial', sans-serif;
+}
+
+.calculator {
+    background: #2d3748;
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    width: 320px;
+}
+
+.mode-toggle {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.mode-btn {
+    flex: 1;
+    padding: 12px;
+    background: #4a5568;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.mode-btn.active {
+    background: #667eea;
+}
+
+.mode-btn:hover {
+    transform: translateY(-2px);
+}
+
+.display {
+    background: #1a202c;
+    color: #fff;
+    font-size: 2.5em;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: right;
+    margin-bottom: 20px;
+    min-height: 60px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+button {
+    padding: 25px;
+    font-size: 1.5em;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 600;
+    color: #fff;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+.num, .decimal {
+    background: #4a5568;
+}
+
+.num:hover, .decimal:hover {
+    background: #5a6578;
+}
+
+.operator {
+    background: #ed8936;
+}
+
+.operator:hover {
+    background: #f59e4e;
+}
+
+.equals {
+    background: #48bb78;
+    grid-column: span 2;
+}
+
+.equals:hover {
+    background: #5acb88;
+}
+
+.clear {
+    background: #f56565;
+    grid-column: span 2;
+}
+
+.clear:hover {
+    background: #ff7575;
+}
+
+.currency-converter {
+    display: none;
+}
+
+.currency-converter.active {
+    display: block;
+}
+
+.currency-input {
+    margin-bottom: 15px;
+}
+
+.currency-input label {
+    display: block;
+    color: #fff;
+    margin-bottom: 8px;
+    font-size: 0.9em;
+}
+
+.currency-input input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    font-size: 1.2em;
+    box-sizing: border-box;
+    background: #1a202c;
+    color: #fff;
+}
+
+.currency-input select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    font-size: 1em;
+    box-sizing: border-box;
+    background: #4a5568;
+    color: #fff;
+    cursor: pointer;
+}
+
+.convert-btn {
+    width: 100%;
+    padding: 15px;
+    background: #48bb78;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.2em;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+.convert-btn:hover {
+    background: #5acb88;
+    transform: translateY(-2px);
+}
+
+.result {
+    background: #1a202c;
+    color: #48bb78;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 15px;
+    font-size: 1.5em;
+    text-align: center;
+    min-height: 30px;
+}
+
+.calculator-mode {
+    display: block;
+}
+
+.calculator-mode.hidden {
+    display: none;
+}

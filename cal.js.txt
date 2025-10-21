@@ -1,0 +1,120 @@
+// Calculator variables
+let currentInput = '0';
+let operator = null;
+let previousValue = null;
+let shouldResetDisplay = false;
+
+const display = document.getElementById('display');
+
+// Exchange rates (approximate - in real app, use API)
+const exchangeRates = {
+    USD: 1,
+    EUR: 0.92,
+    GBP: 0.79,
+    JPY: 149.50,
+    AUD: 1.53,
+    CAD: 1.36,
+    CHF: 0.88,
+    CNY: 7.24,
+    INR: 83.12,
+    PKR: 278.50
+};
+
+// Mode switching
+function switchMode(mode) {
+    const calcMode = document.getElementById('calculatorMode');
+    const convMode = document.getElementById('converterMode');
+    const buttons = document.querySelectorAll('.mode-btn');
+
+    if (mode === 'calculator') {
+        calcMode.classList.remove('hidden');
+        convMode.classList.remove('active');
+        buttons[0].classList.add('active');
+        buttons[1].classList.remove('active');
+    } else {
+        calcMode.classList.add('hidden');
+        convMode.classList.add('active');
+        buttons[0].classList.remove('active');
+        buttons[1].classList.add('active');
+    }
+}
+
+// Calculator functions
+function updateDisplay() {
+    display.textContent = currentInput;
+}
+
+function clearDisplay() {
+    currentInput = '0';
+    operator = null;
+    previousValue = null;
+    shouldResetDisplay = false;
+    updateDisplay();
+}
+
+function appendNumber(num) {
+    if (shouldResetDisplay) {
+        currentInput = num;
+        shouldResetDisplay = false;
+    } else {
+        if (num === '.' && currentInput.includes('.')) return;
+        currentInput = currentInput === '0' ? num : currentInput + num;
+    }
+    updateDisplay();
+}
+
+function appendOperator(op) {
+    if (operator !== null && !shouldResetDisplay) {
+        calculate();
+    }
+    previousValue = parseFloat(currentInput);
+    operator = op;
+    shouldResetDisplay = true;
+}
+
+function calculate() {
+    if (operator === null || previousValue === null) return;
+    
+    const current = parseFloat(currentInput);
+    let result;
+
+    switch(operator) {
+        case '+':
+            result = previousValue + current;
+            break;
+        case '-':
+            result = previousValue - current;
+            break;
+        case '*':
+            result = previousValue * current;
+            break;
+        case '/':
+            result = previousValue / current;
+            break;
+    }
+
+    currentInput = result.toString();
+    operator = null;
+    previousValue = null;
+    shouldResetDisplay = true;
+    updateDisplay();
+}
+
+// Currency converter function
+function convertCurrency() {
+    const amount = parseFloat(document.getElementById('amount').value);
+    const from = document.getElementById('fromCurrency').value;
+    const to = document.getElementById('toCurrency').value;
+    const resultDiv = document.getElementById('result');
+
+    if (isNaN(amount) || amount < 0) {
+        resultDiv.textContent = 'Invalid amount';
+        return;
+    }
+
+    // Convert to USD first, then to target currency
+    const amountInUSD = amount / exchangeRates[from];
+    const convertedAmount = amountInUSD * exchangeRates[to];
+
+    resultDiv.textContent = `${amount.toFixed(2)} ${from} = ${convertedAmount.toFixed(2)} ${to}`;
+}
